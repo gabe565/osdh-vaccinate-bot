@@ -1,0 +1,12 @@
+version: '2.4'
+
+services:
+  app:
+    build: .
+    environment:
+      OSDH_ID: ""
+      BIRTHDATE: ""
+      TELEGRAM_BOT_TOKEN: ""
+      TELEGRAM_CHAT_ID: ""
+    image: gabe565/osdh-vaccinate-notify
+    restart: unless-stopped
