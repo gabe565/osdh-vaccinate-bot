@@ -34,6 +34,11 @@ async function loop() {
 }
 
 if (schedule) {
+    telegram.sendMessage(
+        `OSDH Vaccination Notifier has started watching on schedule: \`${schedule}\``,
+        { parse_mode: "MarkdownV2" }
+    );
+
     cron.schedule(schedule, loop);
 } else {
     loop();
