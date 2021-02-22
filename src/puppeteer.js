@@ -7,6 +7,8 @@ const entrypoint = `https://vaccinate.oklahoma.gov/follow-up-vaccine/?id=${osdhI
 async function updateData() {
     const browser = await puppeteer.launch({
         headless: headless,
+        executablePath: process.env.CHROMIUM_PATH || null,
+        args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
     });
 
     const page = (await browser.pages())[0];
