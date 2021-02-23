@@ -9,5 +9,6 @@ services:
       TELEGRAM_BOT_TOKEN: ""
       TELEGRAM_CHAT_ID: ""
       SCHEDULE: "1,16,31,46 * * * *"
+      HEADLESS: "true"
     image: gabe565/osdh-vaccinate-notify
     restart: unless-stopped
