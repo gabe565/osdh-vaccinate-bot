@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
 
-const { headless, osdhId, birthdate } = require('./options.js');
+const {
+  headless, osdhId, birthYear, birthMonth, birthDay,
+} = require('./options.js');
 
 const entrypoint = `https://vaccinate.oklahoma.gov/follow-up-vaccine/?id=${osdhId}`;
 
@@ -17,15 +19,15 @@ async function updateData() {
 
   // Fill in month
   await page.waitForSelector('#vras_followupmonth');
-  await page.select('#vras_followupmonth', (birthdate.getMonth() + 1).toString());
+  await page.select('#vras_followupmonth', birthMonth);
 
   // Fill in day
   await page.waitForSelector('#vras_followupday');
-  await page.select('#vras_followupday', birthdate.getDate().toString());
+  await page.select('#vras_followupday', birthDay);
 
   // Fill in year
   await page.waitForSelector('#vras_followupyear');
-  await page.type('#vras_followupyear', birthdate.getFullYear().toString());
+  await page.type('#vras_followupyear', birthYear);
 
   // Set up Promise which resolves when EntityList is returned
   let result;
