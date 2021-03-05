@@ -4,16 +4,20 @@ services:
   app:
     build: .
     environment:
-      OSDH_ID: ""
+      OSDH_ID: "180a41c3-8b49-4701-83fc-51c15fc5b44d"
 
-      BIRTH_YEAR: ""
-      BIRTH_MONTH: ""
-      BIRTH_DAY: ""
+      BIRTH_YEAR: "1900"
+      BIRTH_MONTH: "1"
+      BIRTH_DAY: "1"
 
-      TELEGRAM_BOT_TOKEN: ""
-      TELEGRAM_CHAT_ID: ""
+      CRON: "*/10 * * * *"
 
-      SCHEDULE: "1,16,31,46 * * * *"
-      HEADLESS: "true"
+      # Optional. Enables Telegram notifications.
+      # TELEGRAM_BOT_TOKEN: ""
+      # TELEGRAM_CHAT_ID: ""
+
+      # Optional. Enables Slack notifications.
+      # SLACK_TOKEN: ""
+      # SLACK_CHANNEL: ""
     image: gabe565/osdh-vaccinate-notify
     restart: unless-stopped

@@ -1,20 +1,27 @@
 const puppeteer = require('puppeteer');
-
 const {
-  headless, osdhId, birthYear, birthMonth, birthDay,
-} = require('./options.js');
+  osdhId, birthYear, birthMonth, birthDay, headless,
+} = require('./options');
 
 const entrypoint = `https://vaccinate.oklahoma.gov/follow-up-vaccine/?id=${osdhId}`;
+const apiEndpoint = 'https://vaccinate.oklahoma.gov/EntityList/Map/Search/';
 
-async function updateData() {
+let cookies;
+const getCookies = () => cookies;
+let postData;
+const getPostData = () => postData;
+let token;
+const getToken = () => token;
+
+const haveRequestData = () => cookies && postData && token;
+
+async function run() {
   const browser = await puppeteer.launch({
     headless,
     executablePath: process.env.CHROMIUM_PATH || null,
     args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
   });
-
   const page = (await browser.pages())[0];
-
   await page.goto(entrypoint, { waitUntil: 'domcontentloaded' });
 
   // Fill in month
@@ -29,11 +36,20 @@ async function updateData() {
   await page.waitForSelector('#vras_followupyear');
   await page.type('#vras_followupyear', birthYear);
 
+  // Save request data for direct API calls afterwards
+  page.on('request', async (request) => {
+    if (request.url().startsWith(apiEndpoint)) {
+      cookies = (await page.cookies()).map((c) => `${c.name}=${c.value}`).join('; ');
+      postData = request.postData();
+      token = request.headers().__requestverificationtoken;
+    }
+  });
+
   // Set up Promise which resolves when EntityList is returned
   let result;
   const searchResponse = new Promise((resolve) => {
     page.on('response', async (response) => {
-      if (response.url().startsWith('https://vaccinate.oklahoma.gov/EntityList/Map/Search')) {
+      if (response.url().startsWith(apiEndpoint)) {
         const json = await response.json();
         if (json && json.length > 0) {
           result = json;
@@ -59,8 +75,9 @@ async function updateData() {
   clearTimeout(timeout);
 
   await browser.close();
-
   return result;
 }
 
-module.exports = { entrypoint, updateData };
+module.exports = {
+  run, entrypoint, haveRequestData, getCookies, getPostData, getToken, apiEndpoint,
+};

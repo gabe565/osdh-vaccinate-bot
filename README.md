@@ -14,13 +14,16 @@ docker-compose up -d
 
 Can be configured via envs or as commnd line flags.
 
-| Environment Variable | Runtime Flag            | Description                                                                 |
-|----------------------|-------------------------|-----------------------------------------------------------------------------|
-| `OSDH_ID`            | `--osdh-id <id>`        | ID issued from OSDH. Will be at the end of the URL that was emailed to you. |
-| `BIRTH_YEAR`         | `--birth-year <year>`   | Four-digit birth year.                                                      |
-| `BIRTH_MONTH`        | `--birth-month <month>` | Numeric birth month.                                                        |
-| `BIRTH_DAY`          | `--birth-day <day>`     | Numeric birth day.                                                          |
-| `HEADLESS`           | `--headless`            | Run browser in headless mode. Should be set to `true` if you use Docker.    |
-| `TELEGRAM_BOT_TOKEN` | `--bot-token <token>`   | Telegram bot token for Telegram notifications.                              |
-| `TELEGRAM_CHAT_ID`   | `--chat-id <id>`        | Telegram chat ID for Telegram notifications.                                |
-| `SCHEDULE`           | `--schedule <schedule>` | Cron schedule.                                                              |
+| Environment Variable | Runtime Flag                   | Description                                                                                                  |
+|----------------------|--------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `OSDH_ID`            | `--osdh-id <id>`               | ID issued from OSDH. Will be at the end of the URL that was emailed to you.                                  |
+| `BIRTH_YEAR`         | `--birth-year <year>`          | Four-digit birth year.                                                                                       |
+| `BIRTH_MONTH`        | `--birth-month <month>`        | Numeric birth month.                                                                                         |
+| `BIRTH_DAY`          | `--birth-day <day>`            | Numeric birth day.                                                                                           |
+| `CRON`               | `--cron <cron>`                | Run on a cron. Supports the cron syntax defined [here](https://www.npmjs.com/package/node-cron#cron-syntax). |
+| `FILTER`             | `--filter <filter>`            | Filter appointment text (ex: "1st Dose", "2nd Dose", etc).                                                   |
+| `TELEGRAM_BOT_TOKEN` | `--telegram-bot-token <token>` | Telegram bot token.                                                                                          |
+| `TELEGRAM_CHAT_ID`   | `--telegarm-chat-id <id>`      | Telegram chat ID.                                                                                            |
+| `SLACK_TOKEN`        | `--slack-token <token>`        | Slack bot token.                                                                                             |
+| `SLACK_CHANNEL`      | `--slack-channel <id>`         | Slack channel to post notifications to.                                                                      |
+| N/A                  | `--no-headless`                | Run in a regular browser session instead of a headless browser.                                              |
