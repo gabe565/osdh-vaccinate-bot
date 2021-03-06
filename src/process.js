@@ -9,7 +9,7 @@ async function run() {
   let result;
   try {
     if (!haveRequestData()) {
-      console.log('Updating data in browser...');
+      console.log('Initial run in browser to get API keys...');
       result = await runBrowser();
     } else {
       console.log('Updating data from API...');
@@ -19,8 +19,6 @@ async function run() {
     console.error(error);
     return;
   }
-
-  console.log(`Got ${result.length} locations`);
 
   // Filter out fully booked locations
   const availableAppointments = result.filter(
@@ -32,14 +30,14 @@ async function run() {
     (e) => !recentlyNotified.includes(e.Id),
   );
 
+  console.log(`${result.length} total locations. ${availableAppointments.length} available, ${availableAppointments.length - toNotify.length} previously notified.`);
+
   // Add all current IDs to filtered
   recentlyNotified = availableAppointments.map((e) => e.Id);
 
   if (toNotify.length > 0) {
-    console.log('Found locations! Notifying...');
+    console.log(`Sending notification with ${toNotify.length} locations.`);
     await notification.sendLocations(toNotify, osdhId);
-  } else {
-    console.log('No new bookings found');
   }
 }
 
