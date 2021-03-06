@@ -23,7 +23,7 @@ async function run() {
   // Filter out fully booked locations
   const availableAppointments = result.filter(
     (e) => e.Description !== 'No available booking slots at this location'
-      && (!filter || e.Description.toLowerCase().includes(filter.toLowerCase())),
+      && (!filter || `${e.Title} ${e.Description}`.toLowerCase().includes(filter.toLowerCase())),
   );
 
   const toNotify = availableAppointments.filter(
