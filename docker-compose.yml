@@ -13,8 +13,8 @@ services:
       CRON: "*/10 * * * *"
 
       # Optional. Filters appointment text.
-      # FILTER: "1st dose"
-      # FILTER: "2nd dose"
+      # FILTER: "1st"
+      # FILTER: "2nd"
 
       # Optional. Enables Telegram notifications.
       # TELEGRAM_BOT_TOKEN: ""

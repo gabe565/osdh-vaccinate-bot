@@ -21,7 +21,7 @@ Can be configured via envs or as commnd line flags.
 | `BIRTH_MONTH`        | `--birth-month <month>`        | Numeric birth month.                                                                                         |
 | `BIRTH_DAY`          | `--birth-day <day>`            | Numeric birth day.                                                                                           |
 | `CRON`               | `--cron <cron>`                | Run on a cron. Supports the cron syntax defined [here](https://www.npmjs.com/package/node-cron#cron-syntax). |
-| `FILTER`             | `--filter <filter>`            | Filter appointment text (ex: "1st Dose", "2nd Dose", etc).                                                   |
+| `FILTER`             | `--filter <filter>`            | Filter appointment text (ex: "1st", "2nd", etc).                                                             |
 | `TELEGRAM_BOT_TOKEN` | `--telegram-bot-token <token>` | Telegram bot token.                                                                                          |
 | `TELEGRAM_CHAT_ID`   | `--telegarm-chat-id <id>`      | Telegram chat ID.                                                                                            |
 | `SLACK_TOKEN`        | `--slack-token <token>`        | Slack bot token.                                                                                             |
