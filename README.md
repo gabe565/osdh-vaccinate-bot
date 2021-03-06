@@ -1,4 +1,4 @@
-# osdh-vaccinate-notify
+# osdh-vaccine-bot
 
 Sends notifications when vaccination bookings become available
 

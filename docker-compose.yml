@@ -23,5 +23,5 @@ services:
       # Optional. Enables Slack notifications.
       # SLACK_TOKEN: ""
       # SLACK_CHANNEL: ""
-    image: gabe565/osdh-vaccinate-notify
+    image: gabe565/osdh-vaccine-bot
     restart: unless-stopped
